@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EncryptionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,13 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::post('/login', [AuthController::class, 'login']);
-Route::get('/logout', [AuthController::class, 'logout']);
 Route::post('/signup', [AuthController::class, 'signUp']);
-Route::post('/send', [AuthController::class, 'sendData']);
-Route::post('/receive', [AuthController::class, 'receiveData']);
+// AES
+Route::post('/en-a', [EncryptionController::class, 'encryptDataByAES']);
+Route::post('/de-a', [EncryptionController::class, 'decryptDataByAES']);
+// RSA
+Route::post('/en-r', [EncryptionController::class, 'encryptDataByRSA']);
+Route::post('/de-r', [EncryptionController::class, 'decryptDataByRSA']);
+// AES + RSA
+Route::post('/en-ra', [EncryptionController::class, 'encryptDataByAESRSA']);
+Route::post('/de-ra', [EncryptionController::class, 'decryptDataByAESRSA']);
 Route::get('/user', [AuthController::class, 'user']);
+Route::get('/logout', [AuthController::class, 'logout']);
+
+Route::get('/hello', [EncryptionController::class, 'hello']);

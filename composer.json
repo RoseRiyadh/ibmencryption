@@ -14,7 +14,10 @@
         "laravel/tinker": "^2.5",
         "phpseclib/phpseclib": "~3.0",
         "seffeng/laravel-rsa": "^0.1.4",
-      "ext-json": "*"
+      "ext-json": "*",
+      "ext-mcrypt": "*",
+        "ext-openssl": "*",
+        "ext-pdo": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
