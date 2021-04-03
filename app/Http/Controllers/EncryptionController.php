@@ -101,7 +101,7 @@ class EncryptionController extends Controller
         ]);
         try {
             $decrypted = RSA::decrypt(base64_decode($data['data']));
-            return response()->json(base64_encode($decrypted));
+            return response()->json(json_decode($decrypted));
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
         }
