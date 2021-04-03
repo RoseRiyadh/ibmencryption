@@ -38,7 +38,7 @@ class EncryptionController extends Controller
         try
         {
             $encrypted = encrypt($data['data']);
-            return response()->json(base64_encode($encrypted));
+            return response()->json(['data' => base64_encode($encrypted)]);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
         }
@@ -60,7 +60,7 @@ class EncryptionController extends Controller
         try
         {
             $decrypted = decrypt(base64_decode($data['data']));
-            return response()->json(base64_encode($decrypted));
+            return response()->json(['data' => base64_encode($decrypted)]);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
         }
@@ -80,7 +80,7 @@ class EncryptionController extends Controller
         ]);
         try {
             $encrypted = RSA::encrypt($data['data']);
-            return response()->json(base64_encode($encrypted));
+            return response()->json(['data' => base64_encode($encrypted)]);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
         }
@@ -101,8 +101,7 @@ class EncryptionController extends Controller
         ]);
         try {
             $decrypted = RSA::decrypt((base64_decode($data['data'])));
-
-            return response()->json(json_decode($decrypted));
+            return response()->json(['data' => json_decode($decrypted)]);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
         }
