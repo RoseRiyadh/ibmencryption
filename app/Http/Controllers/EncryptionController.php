@@ -60,7 +60,7 @@ class EncryptionController extends Controller
         try
         {
             $decrypted = decrypt(base64_decode($data['data']));
-            return response()->json(['data' => base64_encode($decrypted)]);
+            return response()->json(['data' => json_decode($decrypted)]);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
         }
@@ -166,7 +166,7 @@ class EncryptionController extends Controller
                 {
                     $aesEncrypted = base64_decode($data['data']);
                     $aesDecrypted = decrypt($aesEncrypted);
-                    return response()->json(['data' => $aesDecrypted]);
+                    return response()->json(['data' => json_decode($aesDecrypted)]);
                 }
             }
             return response()->json(['message' => 'not decrypted.'], 400);
